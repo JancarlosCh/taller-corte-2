@@ -112,7 +112,7 @@ class TeacherController extends Controller
 
         // asignar los datos al objeto teacher
         $teacher->name = $request->name;
-        $teacher->lastname = $request->name;
+        $teacher->lastname = $request->lastname;
         $teacher->dni = $request->dni;
         $teacher->address = $request->address;
         $teacher->phone = $request->phone;
