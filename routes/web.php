@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SubjectHasStudentController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +23,27 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+})->name('welcome')->middleware('guest');
+
+Route::get('user/home', [HomeController::class, 'index'])->name('home');
+
+// rutas de administrador
+Route::group(['middleware' => ['is_admin']], function () {
+    Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+    Route::resource('admin/student', StudentController::class);
+    Route::resource('admin/teacher', TeacherController::class);
+    Route::resource('admin/subject', SubjectController::class);
+    Route::resource('admin/classes', SubjectHasStudentController::class);
 });
 
-Route::resource('student', StudentController::class);
-Route::resource('teacher', TeacherController::class);
-Route::resource('subject', SubjectController::class);
+Route::get('login', function() {
+    return redirect('auth/signin');
+});
 
-//Route::get('subject/{subject}/unenroll/{student}', [SubjectController::class, 'unenroll']);
+Route::get('auth/signin', [LoginController::class, 'show'])->name('login.show');
+Route::post('auth/signin', [LoginController::class, 'login'])->name('login.perform');
 
-Route::resource('classes', SubjectHasStudentController::class);
+Route::resource('auth/signup', RegisterController::class)->middleware('guest');
+
+Route::get('auth/logout', [LogoutController::class, 'logout'])->name('logout.perform');
+

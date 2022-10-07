@@ -21,7 +21,7 @@ class SubjectController extends Controller
         $subjects = Subject::paginate(5);
 
         // retornar la vista del index
-        return view('subject.index')->with('subjects', $subjects);
+        return view('admin.subject.index')->with('subjects', $subjects);
     }
 
     /**
@@ -35,7 +35,7 @@ class SubjectController extends Controller
         $teachers = Teacher::all(['id', 'name', 'lastname']);
 
         // retornar la vista del formulario
-        return view('subject.form')->with('teachers', $teachers);
+        return view('admin.subject.form')->with('teachers', $teachers);
     }
 
     /**
@@ -65,7 +65,7 @@ class SubjectController extends Controller
         Session::flash('mensaje', 'Asignatura registrada exitosamente.');
 
         // redireccionar a la vista del index
-        return redirect()->route('subject.index');
+        return redirect()->route('admin.subject.index');
     }
 
     /**
@@ -88,11 +88,12 @@ class SubjectController extends Controller
             'subject_name' => $subject->name,
             'subject_classroom' => $subject->classroom,
             'schedule' => $subject->class_schedule,
-            'students' => $students
+            'students' => $students,
+            'subject' => $subject
         ];
 
         // retornar la vista show
-        return view('subject.show')->with($details);
+        return view('admin.subject.show')->with($details);
     }
 
     /**
@@ -107,7 +108,7 @@ class SubjectController extends Controller
         $teachers = Teacher::all(['id', 'name', 'lastname']);
 
         // retornar la vista del formulario
-        return view('subject.form')->with(['subject' => $subject, 'teachers' => $teachers]);
+        return view('admin.subject.form')->with(['subject' => $subject, 'teachers' => $teachers]);
     }
 
     /**
@@ -140,7 +141,7 @@ class SubjectController extends Controller
         Session::flash('mensaje', 'Los datos de la asignatura han sido actualizados.');
 
         // redireccionar a la vista del index
-        return redirect()->route('subject.index');
+        return redirect()->route('admin.subject.index');
     }
 
     /**
@@ -158,6 +159,6 @@ class SubjectController extends Controller
         Session::flash('mensaje', 'Registro eliminado satisfactoriamente.');
 
         // redireccionar a la vista del index
-        return redirect()->route('subject.index');
+        return redirect()->route('admin.subject.index');
     }
 }

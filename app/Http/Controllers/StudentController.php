@@ -19,7 +19,7 @@ class StudentController extends Controller
         $students = Student::paginate(5);
 
         // retornar la vista del index de estudiantes
-        return view('student.index')
+        return view('admin.student.index')
                 ->with('students', $students);
     }
 
@@ -31,7 +31,7 @@ class StudentController extends Controller
     public function create()
     {
         // retornar la vista del formulario de estudiantes
-        return view('student.form');
+        return view('admin.student.form');
     }
 
     /**
@@ -68,7 +68,7 @@ class StudentController extends Controller
         Session::flash('mensaje', 'Estudiante registrado exitosamente.');
 
         // redireccionar a la vista del index de estudiantes
-        return redirect()->route('student.index');
+        return redirect()->route('admin.student.index');
     }
 
     /**
@@ -93,7 +93,7 @@ class StudentController extends Controller
         // obtentener los niveles
 
         // retornar a la vista del formulario y enviarle el objeto estudiante
-        return view('student.form')->with('student', $student);
+        return view('admin.student.form')->with('student', $student);
     }
 
     /**
@@ -132,7 +132,7 @@ class StudentController extends Controller
         Session::flash('mensaje', 'Los datos del estudiante han sido actualizados.');
 
         // redireccionar a la vista del index de estudiantes
-        return redirect()->route('student.index');
+        return redirect()->route('admin.student.index');
     }
 
     /**
@@ -150,6 +150,6 @@ class StudentController extends Controller
         Session::flash('mensaje', 'Registro eliminado satisfactoriamente.');
 
         // redirigir a la vista del index de estudiantes
-        return redirect()->route('student.index');
+        return redirect()->route('admin.student.index');
     }
 }

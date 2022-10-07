@@ -25,7 +25,7 @@ class SubjectHasStudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($subject)
     {
         // obtener asignaruras
         $subjects = Subject::all(['id', 'name']);
@@ -34,7 +34,7 @@ class SubjectHasStudentController extends Controller
         $students = Student::all(['id', 'name', 'lastname']);
 
         // retornar la vista del formulario de matricula
-        return view('classes.form')->with([
+        return view('admin.classes.form')->with([
             'subjects' => $subjects,
             'students' => $students
         ]);
@@ -65,7 +65,7 @@ class SubjectHasStudentController extends Controller
         Session::flash('mensaje', 'Estudiante matriculado exitosamente.');
 
         //retornar a la vista del curso
-        return redirect()->route('subject.show', $subject);
+        return redirect()->route('admin.subject.show', $subject);
     }
 
     /**
@@ -122,7 +122,7 @@ class SubjectHasStudentController extends Controller
         Session::flash('mensaje', 'Registro eliminado satisfactoriamente.');
 
         // definir la ruda a direccionar
-        $route = 'subject/' . $subject_id;
+        $route = 'admin/subject/' . $subject_id;
         // redireccionar a la vista vista de mostrar la asignatura
         return redirect($route);
     }

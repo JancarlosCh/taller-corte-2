@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid">
         <h1 class="text-center mt-5">Formulario de matricula</h1>
-        <form action="{{ route('classes.store') }} " method="POST" class="row g-3 mt-3">
+        <form action="{{ route('subjecthasstudent.store') }} " method="POST" class="row g-3 mt-3">
             @csrf
             <div class="col-md-6 offset-md-3">
                 <label for="subject_id" class="form-label">Asignatura</label>

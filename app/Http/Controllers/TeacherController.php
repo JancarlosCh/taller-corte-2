@@ -17,7 +17,7 @@ class TeacherController extends Controller
     {
         //
         $teachers = Teacher::paginate(5);
-        return view('teacher.index')->with('teachers', $teachers);
+        return view('admin.teacher.index')->with('teachers', $teachers);
     }
 
     /**
@@ -27,7 +27,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('teacher.form');
+        return view('admin.teacher.form');
     }
 
     /**
@@ -87,7 +87,7 @@ class TeacherController extends Controller
     public function edit(Teacher $teacher)
     {
         // retornar la vista del formulario
-        return view('teacher.form')->with('teacher', $teacher);
+        return view('admin.teacher.form')->with('teacher', $teacher);
     }
 
     /**
